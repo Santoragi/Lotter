@@ -3,7 +3,9 @@ package com.example.lotter.lotto;
 import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NumberGenerator {
 
     RandomGenerator random = RandomGenerator.getDefault();
