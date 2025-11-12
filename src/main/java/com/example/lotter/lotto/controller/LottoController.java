@@ -1,6 +1,6 @@
 package com.example.lotter.lotto.controller;
 
-import com.example.lotter.lotto.LottoDraw;
+import com.example.lotter.lotto.domain.LottoDraw;
 import com.example.lotter.lotto.service.LottoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

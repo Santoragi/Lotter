@@ -1,6 +1,6 @@
 package com.example.lotter.lotto.service;
 
-import com.example.lotter.lotto.LottoDraw;
+import com.example.lotter.lotto.domain.LottoDraw;
 
 public interface LottoService {
 

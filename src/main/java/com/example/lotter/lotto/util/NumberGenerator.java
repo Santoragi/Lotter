@@ -1,4 +1,4 @@
-package com.example.lotter.lotto;
+package com.example.lotter.lotto.util;
 
 import java.util.List;
 import java.util.random.RandomGenerator;

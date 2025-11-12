@@ -1,6 +1,6 @@
 package com.example.lotter.lotto.repository;
 
-import com.example.lotter.lotto.LottoDraw;
+import com.example.lotter.lotto.domain.LottoDraw;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,4 +1,4 @@
-package com.example.lotter.lotto;
+package com.example.lotter.lotto.domain;
 
 import java.util.List;
 import lombok.Getter;

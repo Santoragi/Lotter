@@ -1,7 +1,7 @@
 package com.example.lotter.lotto.service;
 
-import com.example.lotter.lotto.LottoDraw;
-import com.example.lotter.lotto.NumberGenerator;
+import com.example.lotter.lotto.domain.LottoDraw;
+import com.example.lotter.lotto.util.NumberGenerator;
 import com.example.lotter.lotto.repository.LottoRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

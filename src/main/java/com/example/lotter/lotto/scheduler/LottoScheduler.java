@@ -1,6 +1,6 @@
 package com.example.lotter.lotto.scheduler;
 
-import com.example.lotter.lotto.LottoDraw;
+import com.example.lotter.lotto.domain.LottoDraw;
 import com.example.lotter.lotto.service.LottoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
