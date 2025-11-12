@@ -16,7 +16,7 @@ public class NumberGenerator {
 
     public List<Integer> generateLottoNumbers() {
 
-        return random.ints(MIN_NUMBER, MAX_NUMBER)
+        return random.ints(MIN_NUMBER, MAX_NUMBER + 1)
                 .distinct()
                 .limit(LOTTO_NUMBER_COUNT)
                 .sorted()
@@ -26,7 +26,7 @@ public class NumberGenerator {
 
     public Integer generateBonusNumber(List<Integer> numbers) {
 
-        return random.ints(MIN_NUMBER, MAX_NUMBER)
+        return random.ints(MIN_NUMBER, MAX_NUMBER + 1)
                 .filter(num -> !numbers.contains(num))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("보너스 번호 생성 실패"));
