@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오늘의 로또 당첨 결과</title>
+</head>
+<body>
+<h1>오늘의 로또 당첨 결과</h1>
+
+<div>
+    <div th:each="num : ${winningNumbers}" th:text="${num}"></div>
+    <div>+</div>
+    <div th:text="${bonusNumber}"></div>
+</div>
+</body>
+</html>
