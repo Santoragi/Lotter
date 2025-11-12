@@ -25,4 +25,9 @@ public class LottoServiceImpl implements LottoService{
 
         return todayLottoDraw;
     }
+
+    @Override
+    public LottoDraw getTodayLottoDraw() {
+        return lottoRepository.findTodayLottoDraw();
+    }
 }

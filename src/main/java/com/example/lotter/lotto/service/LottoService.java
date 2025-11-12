@@ -5,4 +5,5 @@ import com.example.lotter.lotto.LottoDraw;
 public interface LottoService {
 
     LottoDraw generateTodayLottoDraw();
+    LottoDraw getTodayLottoDraw();
 }
