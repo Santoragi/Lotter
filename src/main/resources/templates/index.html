@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lotter</title>
+</head>
+<body>
+<h1>Lotter</h1>
+
+<p>현재 잔액: <span id = "amount">0</span>원</p>
+
+<script>
+
+    const STORAGE_KEY = "lottoUser";
+    const BASE_URL = "http://localhost:8080/api";
+    const today = new Date().toLocaleDateString();
+
+    let user = {
+        amount: 0,
+        lastVisitDate: null
+    }
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        user = JSON.parse(saved);
+    }
+
+    function saveUser() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    }
+
+    function requestDailyAmount() {
+        if(user.lastVisitDate !== today) {
+            fetch(`${BASE_URL}/daily-amount`)
+                .then(response => response.json())
+                .then(data => {
+                    user.amount += data.amount;
+                    user.lastVisitDate = today;
+                    saveUser();
+                    updateUI();
+                });
+        }
+    }
+
+    function updateUI() {
+        document.getElementById("amount").textContent = user.amount.toLocaleString();
+    }
+
+    requestDailyAmount();
+
+</script>
+</body>
+</html>
