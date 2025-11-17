@@ -101,7 +101,14 @@
             },
             body: JSON.stringify({ price: input })
         })
-            .then(res => res.json())
+            .then(async res => {
+                if (!res.ok) {
+                    const error = await res.json();
+                    throw new Error(error.message);
+                }
+
+                return res.json();
+            })
             .then(data => {
 
                 user.amount -= input;
@@ -112,6 +119,9 @@
 
                 updateUI();
 
+            })
+            .catch(err => {
+                alert(err.message);
             });
     }
 

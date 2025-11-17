@@ -1,11 +1,10 @@
-package com.example.lotter.lotto.util;
+package com.example.lotter.lotto.util.generator;
 
 import static com.example.lotter.lotto.constant.LottoConstant.LOTTO_PRICE;
 
 import com.example.lotter.lotto.domain.Lotto;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

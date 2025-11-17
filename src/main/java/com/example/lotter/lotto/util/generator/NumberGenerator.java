@@ -1,4 +1,4 @@
-package com.example.lotter.lotto.util;
+package com.example.lotter.lotto.util.generator;
 
 import static com.example.lotter.lotto.constant.LottoConstant.LOTTO_NUMBER_COUNT;
 import static com.example.lotter.lotto.constant.LottoConstant.MAX_NUMBER;
