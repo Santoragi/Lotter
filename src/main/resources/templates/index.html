@@ -9,9 +9,21 @@
 
 <p>현재 잔액: <span id = "amount">0</span>원</p>
 
+<div>
+    <label>구입 금액 입력:</label>
+    <input type="number" id="buyPrice" placeholder="예: 5000">
+    <button onclick="buyLotto()">구매하기</button>
+</div>
+
+<hr>
+
+<h3>구매 결과</h3>
+<div id="result"></div>
+
 <script>
 
-    const STORAGE_KEY = "lottoUser";
+    const USER_STORAGE = "lottoUser";
+    const LOTTO_STORAGE = "lottos";
     const BASE_URL = "http://localhost:8080/api";
     const today = new Date().toLocaleDateString();
 
@@ -20,13 +32,23 @@
         lastVisitDate: null
     }
 
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-        user = JSON.parse(saved);
+    const savedUser = localStorage.getItem(USER_STORAGE);
+    if (savedUser) {
+        user = JSON.parse(savedUser);
+    }
+
+    let lottoList = [];
+    const savedLottos = localStorage.getItem(LOTTO_STORAGE);
+    if (savedLottos) {
+        lottoList = JSON.parse(savedLottos);
     }
 
     function saveUser() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+        localStorage.setItem(USER_STORAGE, JSON.stringify(user));
+    }
+
+    function saveLottos() {
+        localStorage.setItem(LOTTO_STORAGE, JSON.stringify(lottoList));
     }
 
     function requestDailyAmount() {
@@ -40,10 +62,67 @@
                     updateUI();
                 });
         }
+        else{
+            updateUI();
+        }
     }
 
     function updateUI() {
         document.getElementById("amount").textContent = user.amount.toLocaleString();
+        printLottos();
+    }
+
+    function printLottos() {
+        let html = "";
+
+        lottoList.forEach(lotto => {
+            html += `<p>${lotto.numbers.join(", ")}</p>`;
+        });
+
+        document.getElementById("result").innerHTML = html;
+    }
+
+    function buyLotto() {
+        const input = Number(document.getElementById("buyPrice").value);
+
+        if (input <= 0) {
+            alert("올바른 금액을 입력하세요.");
+            return;
+        }
+        if (input > user.amount) {
+            alert("잔액이 부족합니다.");
+            return;
+        }
+
+        fetch(`${BASE_URL}/lotto`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ price: input })
+        })
+            .then(async res => {
+                if (!res.ok) {
+                    const error = await res.json();
+                    throw new Error(error.message);
+                }
+
+                return res.json();
+            })
+            .then(data => {
+
+                user.amount -= input;
+                saveUser();
+
+                data.lottos.forEach(lotto => lottoList.push(lotto));
+                saveLottos();
+
+                updateUI();
+
+            })
+            .catch(err => {
+                alert(err.message);
+            });
     }
 
     requestDailyAmount();
